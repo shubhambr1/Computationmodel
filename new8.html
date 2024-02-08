@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Population Growth Simulator</title>
+    <link rel="stylesheet" href="populationsimulator.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #input-form {
+            margin-bottom: 20px;
+        }
+
+        #simulation {
+            margin-top: 20px;
+        }
+
+        #chart {
+            width: 100%;
+            height: 400px;
+        }
+        #voice-command {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Population Growth Simulator</h1>
+
+    <form id="input-form">
+        <label for="initial-population" >Initial Population Size:</label>
+        <input type="number" class="easy" id="initial-population" placeholder="Enter population size" />
+
+        <label for="birth-rate">Birth Rate:</label>
+        <input type="number" id="birth-rate" class="easy" placeholder="Enter Birth rate"/>
+
+        <label for="death-rate">Death Rate:</label>
+        <input type="number" id="death-rate" class="easy" placeholder="Enter Death rate" /><br>
+
+        
+<br>
+<p class="ram">The difference between the birth and the death rate denotes population growth.
+    Population growth is positive if there are more births than death and negative if there are more deaths than birth.
+    Population growth depends majorly on fertility, migration, and mortality.</p>
+    <p>
+      
+<ul class="ram">
+    <li>Kindly fill the details and press Simulation</li>
+    <li>You can also use voice method option for Simulation</li>
+    
+    <li><a href="file:///D:/club/new9.html">For disease simulation click</a></li>
+    <li><a href="file:///D:/club/new12.html">For Stock Market Analyzer</a></li>
+</ul>
+<br>
+
+    </p>
+<p>
+        <button type="button" onclick="simulatePopulationGrowth()">Simulate Population Growth</button>
+        <div id="voice-command">
+            <button id="start-voice">Start Voice Command</button>
+        </div>
+        </p>
+        </p>
+    </p>
+    </form>
+
+    <div id="simulation">
+        <canvas id="chart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Code for voice command
+
+        // Initialize SpeechRecognition instance
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        // Start voice command
+        document.getElementById('start-voice').addEventListener('click', function() {
+            recognition.start();
+        });
+
+        // Add event listener for voice recognition result
+        recognition.addEventListener('result', function(event) {
+            const result = event.results[0][0].transcript.toLowerCase();
+            console.log('Result:', result);
+            if (result === 'start simulation') {
+                simulatePopulationGrowth();
+            }
+        });
+        function simulatePopulationGrowth() {
+            // Get input values
+            var initialPopulation = parseInt(document.getElementById('initial-population').value);
+            var birthRate = parseFloat(document.getElementById('birth-rate').value);
+            var deathRate = parseFloat(document.getElementById('death-rate').value);
+
+            // Simulation parameters
+            var simulationPeriod = 10; // Number of years to simulate
+
+            // Initialize population array
+            var population = [initialPopulation];
+
+            // Simulate population growth
+            for (var year = 1; year <= simulationPeriod; year++) {
+                var births = Math.round(population[year - 1] * birthRate);
+                var deaths = Math.round(population[year - 1] * deathRate);
+
+                var newPopulation = population[year - 1] + births - deaths;
+                population.push(newPopulation);
+            }
+
+            // Generate chart
+            var ctx = document.getElementById('chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({ length: simulationPeriod }, (_, i) => i + 1),
+                    datasets: [{
+                        label: 'Population',
+                        data: population,
+                        backgroundColor: 'rgba(0, 21, 37, 0.8)',
+                        borderColor: 'rgba(28, 0, 39, 0.8)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            precision: 0
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- saved from url=(0026)file:///D:/club/new12.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #chart-container {
+            width: 80%;
+            max-width: 800px;
+            height: 400px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chart-container"></div>
+
+    <!-- Include local copy of Chart.js library -->
+    <script src="file:///D:/club/path/to/Chart.js"></script>
+
+    <script>
+        // Sample data for demonstration purposes
+        const historicalData = [
+            { date: '2024-01-01', actualPrice: 100, predictedPrice: 95 },
+            { date: '2024-01-02', actualPrice: 105, predictedPrice: 100 },
+            // Add more data as needed
+        ];
+
+        // Function to draw the chart
+        function drawChart() {
+            // Create a chart using Chart.js
+            const ctx = document.getElementById('chart-container').getContext('2d');
+
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: historicalData.map(data => data.date),
+                    datasets: [
+                        {
+                            label: 'Actual Price',
+                            data: historicalData.map(data => data.actualPrice),
+                            borderColor: 'blue',
+                            fill: false,
+                        },
+                        {
+                            label: 'Predicted Price',
+                            data: historicalData.map(data => data.predictedPrice),
+                            borderColor: 'red',
+                            fill: false,
+                        },
+                    ],
+                },
+            });
+        }
+
+        // Call the drawChart function when the page loads
+        window.onload = drawChart;
+    </script>
+
+
+
+</body></html>

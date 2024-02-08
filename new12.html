@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="Styles.css" />
+   
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock : Analyzer</title>
+  </head>
+  <body>
+    <ul class="ram">
+    <li><a href="file:///D:/club/new8.html">Go back to population simulator</a></li>
+    <li><a href="file:///D:/club/new9.html">Go back to disease simulator</a></li>
+</ul>
+    <header>
+      <div class="logo">
+        <div class="logoHolder">
+          <img src="https://img.icons8.com/nolan/256/graph-report.png" />
+        </div>
+        <div class="appTitle"><h1>Stock Analyzer</h1></div>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrapper">
+        <section class="description">
+          <h2>Check Profit or Loss on your Stock</h2>
+        </section>
+        <section class="stock">
+          <div class="stock__details">
+            <div class="puchase">
+              <input
+                type="number"
+                id="purchase_price"
+                placeholder="💲 stock purchase price"
+              />
+            </div>
+
+            <div class="quantity">
+              <input
+                type="number"
+                id="quantity"
+                placeholder="💲 stock quantity"
+              />
+            </div>
+
+            <div class="current_price">
+              <input
+                type="number"
+                id="current_price"
+                placeholder="💲 stock current price"
+              />
+            </div>
+          </div>
+          <button type="button" id="btn">check</button>
+        </section>
+      </div>
+      <section class="showResult" id="displayResult">
+        <div class="close">
+          <div class="closeIcon" id="close">
+            <img
+              src="https://img.icons8.com/ios-filled/50/ffffff/multiply.png"
+            />
+          </div>
+        </div>
+        <div class="result">
+          <div class="resultContianer" id="resultContianer">
+            <h2 id="resultInNum">You have make a Profite</h2>
+            <br />
+            <h2 id="resultInPercentage">You won rupee</h2>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="connectWrapper">
+        <a
+          href="https://github.com/shubhambr1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="connect">
+            <img src="https://img.icons8.com/color/240/000000/github--v3.gif" />
+          </div>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/shubham-pandey-910186278/"
+          target="_blank"
+        >
+          <div class="connect">
+            <img
+              src="https://img.icons8.com/color/240/000000/linkedin-circled--v2.gif"
+            />
+          </div>
+        </a>
+
+        <a
+          href="https://twitter.com/shubhambxr_1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="connect">
+            <img
+              src="https://img.icons8.com/color/240/000000/twitter--v2.gif"
+            />
+          </div>
+        </a>
+      </div>
+    </footer>
+  </body>
+  <script src="./App.js"></script>
+</html>

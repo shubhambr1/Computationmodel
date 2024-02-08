@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Disease Spread Simulation</title>
+    <link rel="stylesheet" href="populationsimulator.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .simulation {
+            margin-top: 20px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+        }
+
+        #chart {
+            width: 100%;
+            height: 100%;
+        }
+
+        button {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Disease Spread Simulation</h1>
+
+        <div class="form-group">
+            <label for="population">Population:</label>
+            <input type="number" id="population" placeholder="Enter population" min="1" value="1000">
+        </div>
+
+        <div class="form-group">
+            <label for="initial-infected">Initial Infected:</label>
+            <input type="number" id="initial-infected" placeholder="Enter Intial-Infected" min="1" value="10">
+        </div>
+
+        <div class="form-group">
+            <label for="infection-rate">Infection Rate:</label>
+            <input type="number" id="infection-rate" placeholder="Enter Infected-Rate" min="0" max="1" step="0.01" value="0.2">
+        </div>
+
+        <div class="form-group">
+            <label for="recovery-rate">Recovery Rate:</label>
+            <input type="number" id="recovery-rate" placeholder="Enter Recovery-Rate" min="0" max="1" step="0.01" value="0.1">
+        </div>
+
+        <button id="start-simulation">Start Simulation</button>
+<br>
+<br>
+<ul class="ram">
+<li><a href="file:///D:/club/new8.html">Go back to population simulator</a></li>
+<li><a href="file:///D:/club/new12.html">For Stock Market Analyzer</a></li>
+
+
+</ul>
+        <div class="simulation">
+            <h2>Simulation Results</h2>
+            <div class="chart-container">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.getElementById('start-simulation').addEventListener('click', function () {
+            var population = parseInt(document.getElementById('population').value);
+            var initialInfected = parseInt(document.getElementById('initial-infected').value);
+            var infectionRate = parseFloat(document.getElementById('infection-rate').value);
+            var recoveryRate = parseFloat(document.getElementById('recovery-rate').value);
+
+            simulateDiseaseSpread(population, initialInfected, infectionRate, recoveryRate);
+        });
+
+        function simulateDiseaseSpread(population, initialInfected, infectionRate, recoveryRate) {
+            var infected = [initialInfected];
+            var susceptible = [population - initialInfected];
+            var recovered = [0];
+            var days = [0];
+
+            var ctx = document.getElementById('chart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: days,
+                    datasets: [
+                        {
+                            label: 'Infected',
+                            data: infected,
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Susceptible',
+                            data: susceptible,
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Recovered',
+                            data: recovered,
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Days'
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Number of Individuals'
+                            }
+                        }]
+                    }
+                }
+            });
+
+            for (var i = 1; i <= 30; i++) { // Simulate for 30 days
+                var newInfected = Math.round(susceptible[i - 1] * infectionRate);
+                var newRecovered = Math.round(infected[i - 1] * recoveryRate);
+
+                infected.push(infected[i - 1] + newInfected - newRecovered);
+                susceptible.push(susceptible[i - 1] - newInfected);
+                recovered.push(recovered[i - 1] + newRecovered);
+                days.push(i);
+            }
+
+            chart.update();
+        }
+    </script>
+</body>
+
+</html>

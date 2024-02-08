@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Population Growth Simulator</title>
+  <link rel="stylesheet" href="populationsimulator.css">
+</head>
+<body>
+  <div id="simulator-container">
+    <h1>Population Growth Simulator</h1>
+    <div id="input-panel">
+      <label for="initial-population">Initial Population:</label>
+      <input type="number" id="initial-population" value="1000">
+      <label for="birth-rate">Birth Rate (%):</label>
+      <input type="number" id="birth-rate" value="2">
+      <label for="death-rate">Death Rate (%):</label>
+      <input type="number" id="death-rate" value="1">
+      <br>
+      <label for="immigration">Immigration Rate:</label>
+      <input type="number" id="immigration" value="0">
+      <label for="emigration">Emigration Rate:</label>
+      <input type="number" id="emigration" value="0">
+      <br>
+      <label for="healthcare">Healthcare Effect (%):</label>
+      <input type="number" id="healthcare" value="0">
+      <button id="start-simulation">Start Simulation</button>
+    </div>
+    <div id="visualization-container">
+      <canvas id="chart"></canvas>
+      <div id="info-panel"></div>
+    </div>
+  </div>
+  <script src="populationsimulator.js"></script>
+</body>
+</html>
